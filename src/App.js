@@ -34,7 +34,7 @@ class App extends React.Component {
         </a>
         <pre>
 {
-JSON.stringify(this.props)
+JSON.stringify(this.props)  //shows that state is being mapped to props successfully
 }
 </pre>
         <button onClick={this.simpleAction}>Test redux action</button>
@@ -46,12 +46,20 @@ JSON.stringify(this.props)
 
 // Redux code:
 
-const mapStateToProps = state => ({
-  ...state
- })
+
+// we return the an object that we build, pass in the value from state (from the reducer) 
+// for whatever key we desire.
+const mapStateToProps = (state) => {
+    return {
+      data: state.data
+    }
+ }
 
  const mapDispatchToProps = dispatch => ({
   simpleAction: () => dispatch(simpleAction())
  })
 
+
+ //connect returns a higher order component which then wraps App. 
+ //This is how we connect state to props for App component.
 export default connect(mapStateToProps, mapDispatchToProps)(App);
