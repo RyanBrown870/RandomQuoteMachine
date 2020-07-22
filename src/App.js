@@ -1,8 +1,22 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { simpleAction } from './actions/simpleAction';
+import { connect } from 'react-redux';
 
-function App() {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.simpleAction = this.simpleAction.bind(this);
+  }
+
+  simpleAction = (event) => {
+    this.props.simpleAction();
+   }
+
+   render() {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,9 +32,26 @@ function App() {
         >
           Learn React
         </a>
+        <pre>
+{
+JSON.stringify(this.props)
+}
+</pre>
+        <button onClick={this.simpleAction}>Test redux action</button>
       </header>
     </div>
   );
+   }
 }
 
-export default App;
+// Redux code:
+
+const mapStateToProps = state => ({
+  ...state
+ })
+
+ const mapDispatchToProps = dispatch => ({
+  simpleAction: () => dispatch(simpleAction())
+ })
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
