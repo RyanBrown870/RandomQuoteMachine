@@ -1,34 +1,68 @@
 import React from 'react';
-
-
 import { simpleAction } from '../../actions/simpleAction';
 import { connect } from 'react-redux';
 import ReactFCCtest from 'react-fcctest';
+import QuoteBox from '../QuoteBox/QuoteBox';
+import FamousQuote from '../../util/FamousQuote';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      Quotes: [
-        {id: 1, content: 'be as you are', author: 'Dickens'}, 
-        {id: 2, content: 'keep on truckin', author: 'Trucker'}, 
-        {id: 3, content: 'we are one', author: 'Chris Eubank'}
-      ]
+      quote: {
+        
+      }
     }
 
-    
+    this.getQuote = this.getQuote.bind(this);
   }
 
-  
+ //to retrieve a quote when page loads to intialise state
+  componentWillMount() {
+    this.getQuote();
+  }
 
-   render() {
+ 
 
-  return (
-    <div className="App">
-      
-<h1>Here we go</h1>
-      {/* We need:
+  getQuote() {
+    FamousQuote.getQuote().then(quote => {
+      console.log(quote)
+      this.setState({
+        quote: quote
+      })
+    }
+     
+    )
+  }
+
+  render() {
+
+    return (
+      <div className="container-fluid">
+
+        
+        <div className="row"></div>
+        
+
+          <QuoteBox quote={this.state.quote} getQuote={this.getQuote}/>
+    
+
+        
+        <div className="row"></div>
+
+    { /*  FreeCodeCamp tests  */}
+        <div>
+          <ReactFCCtest />
+        </div>
+
+      </div>
+
+    );
+  }
+}
+
+{/* We need:
             id="quote-box"
               id="text"
               id="author"
@@ -51,19 +85,6 @@ class App extends React.Component {
             3. sort out CSS etc
         
       */}
-        
-        
-        
-      
-      <div>
-        <ReactFCCtest />
-      </div>
-      
-    </div>
-    
-  );
-   }
-}
 
 // Redux code:
 
@@ -71,19 +92,19 @@ class App extends React.Component {
 // we return the an object that we build, pass in the value from state (from the reducer) 
 // for whatever key we desire.
 const mapStateToProps = (state) => {
-    return {
-      data: state.data
-    }
- }
+  return {
+    data: state.data
+  }
+}
 
- //how to send actions in props to update redux store state
- const mapDispatchToProps = (dispatch) => {
-   return {
-  simpleAction: (data) => { dispatch(simpleAction(data)) }
- }
+//how to send actions in props to update redux store state
+const mapDispatchToProps = (dispatch) => {
+  return {
+    simpleAction: (data) => { dispatch(simpleAction(data)) }
+  }
 }
 
 
- //connect returns a higher order component which then wraps App. 
- //This is how we connect state to props for App component.
+//connect returns a higher order component which then wraps App. 
+//This is how we connect state to props for App component.
 export default connect(mapStateToProps, mapDispatchToProps)(App);
