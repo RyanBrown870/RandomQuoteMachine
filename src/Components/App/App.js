@@ -1,13 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { simpleAction } from './actions/simpleAction';
+
+
+import { simpleAction } from '../../actions/simpleAction';
 import { connect } from 'react-redux';
 import ReactFCCtest from 'react-fcctest';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      Quotes: [
+        {id: 1, content: 'be as you are', author: 'Dickens'}, 
+        {id: 2, content: 'keep on truckin', author: 'Trucker'}, 
+        {id: 3, content: 'we are one', author: 'Chris Eubank'}
+      ]
+    }
 
     
   }
@@ -18,20 +26,8 @@ class App extends React.Component {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-
+      
+<h1>Here we go</h1>
       {/* We need:
             id="quote-box"
               id="text"
@@ -58,7 +54,7 @@ class App extends React.Component {
         
         
         
-      </header>
+      
       <div>
         <ReactFCCtest />
       </div>
