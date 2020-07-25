@@ -10,7 +10,10 @@ class QuoteBox extends React.Component {
         return (
             <div className="row align-items-center">
                 <div className="col-3"></div>
-            <div className="col-6" id="quote-box">
+            <div className="col-6 card" id="quote-box">
+                <div className="row">
+                    <div className="col-1"></div>
+                    <div className="col-10">
                 <div id="text">
         <blockquote className="blockquote text-center"><strong>"</strong>{this.props.quote.quote}</blockquote>
                 </div>
@@ -31,7 +34,9 @@ class QuoteBox extends React.Component {
                 </a>
 
                 <button className="btn btn-default" id="new-quote" onClick={this.props.getQuote}>New quote</button>
-
+                </div>
+                <div className="col-1"></div>
+                </div>
             </div>
             <div className="col-3"></div>
             
