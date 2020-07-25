@@ -10,23 +10,24 @@ class QuoteBox extends React.Component {
         return (
             <div className="row align-items-center">
                 <div className="col-3"></div>
-            <div className="col-6 card border-0" id="quote-box">
+            <div className="col-6 card border-0 bg-white" id="quote-box">
                 <div className="card-body">
                     
                     
                 <div id="text">
-        <blockquote className="blockquote text-center"><strong>"</strong>{this.props.quote.quote.quote}</blockquote>
+        <blockquote className={"blockquote text-center text-" + this.props.color}><strong>"</strong>{this.props.quote.quote}</blockquote>
                 </div>
 
-                <div className="text-muted" id="author">
+                <div className="text-muted text-white" id="author">
                     <blockquote>
-                        <footer className="blockquote-footer text-right">{this.props.quote.quote.author}</footer>
+                        <footer className={"blockquote-footer text-right text-" + this.props.color}>{this.props.quote.author}</footer>
                         </blockquote>
         
                 </div>
 
+                
                 <a 
-                className="btn btn-social-icon btn-twitter"
+                className={"btn btn-social-icon btn-twitter bg-" + this.props.color}
                 href="https://twitter.com/intent/tweet"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -34,7 +35,7 @@ class QuoteBox extends React.Component {
                     <span className="fa fa-twitter"></span>
                 </a>
 
-                <button className="btn btn-default" id="new-quote" onClick={this.props.getQuote}>New quote</button>
+                <button className={"btn btn-default float-right text-white bg-" + this.props.color} id="new-quote" onClick={this.props.getQuote}>New quote</button>
                 </div>
                 
             </div>

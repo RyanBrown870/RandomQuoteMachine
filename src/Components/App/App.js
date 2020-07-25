@@ -5,6 +5,16 @@ import ReactFCCtest from 'react-fcctest';
 import QuoteBox from '../QuoteBox/QuoteBox';
 import FamousQuote from '../../util/FamousQuote';
 
+const colors = [
+  'primary',
+  'secondary',
+  'success',
+  'danger',
+  'warning',
+  'info',
+  'dark',
+];
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +23,8 @@ class App extends React.Component {
       quote: {
         quote: '',
         author: ''
-      }
+      },
+      color: 'primary'
       
     }
 
@@ -34,28 +45,30 @@ class App extends React.Component {
   getQuote() {
     
     FamousQuote.getQuote().then(quote => {
-      console.log(quote)
+      const color = colors[Math.floor(Math.random()*6)];
       this.setState({
-        
-        quote: quote
+        quote: quote,
+        color: color
       })
     }
      
     )
   }
 
+
+
   
 
   render() {
 
     return (
-      <div className="container-fluid">
+      <div className={'container-fluid bg-' + this.state.color}  style = {{height:"100vh"}}>
 
         
         <div className="row"></div>
         
 
-          <QuoteBox quote={this.state} getQuote={this.getQuote}/>
+          <QuoteBox quote={this.state.quote} color={this.state.color} getQuote={this.getQuote}/>
     
 
         
