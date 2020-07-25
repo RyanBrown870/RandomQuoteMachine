@@ -10,17 +10,17 @@ class QuoteBox extends React.Component {
         return (
             <div className="row align-items-center">
                 <div className="col-3"></div>
-            <div className="col-6 card" id="quote-box">
-                <div className="row">
-                    <div className="col-1"></div>
-                    <div className="col-10">
+            <div className="col-6 card border-0" id="quote-box">
+                <div className="card-body">
+                    
+                    
                 <div id="text">
-        <blockquote className="blockquote text-center"><strong>"</strong>{this.props.quote.quote}</blockquote>
+        <blockquote className="blockquote text-center"><strong>"</strong>{this.props.quote.quote.quote}</blockquote>
                 </div>
 
                 <div className="text-muted" id="author">
                     <blockquote>
-                        <footer className="blockquote-footer text-right">{this.props.quote.author}</footer>
+                        <footer className="blockquote-footer text-right">{this.props.quote.quote.author}</footer>
                         </blockquote>
         
                 </div>
@@ -29,14 +29,14 @@ class QuoteBox extends React.Component {
                 className="btn btn-social-icon btn-twitter"
                 href="https://twitter.com/intent/tweet"
                 target="_blank"
+                rel="noopener noreferrer"
                 id="tweet-quote">
                     <span className="fa fa-twitter"></span>
                 </a>
 
                 <button className="btn btn-default" id="new-quote" onClick={this.props.getQuote}>New quote</button>
                 </div>
-                <div className="col-1"></div>
-                </div>
+                
             </div>
             <div className="col-3"></div>
             

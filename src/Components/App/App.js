@@ -11,30 +11,40 @@ class App extends React.Component {
 
     this.state = {
       quote: {
-        
+        quote: '',
+        author: ''
       }
+      
     }
 
     this.getQuote = this.getQuote.bind(this);
+    
   }
 
  //to retrieve a quote when page loads to intialise state
-  componentWillMount() {
+  componentDidMount() {
     this.getQuote();
+   
   }
 
- 
+
+
+
 
   getQuote() {
+    
     FamousQuote.getQuote().then(quote => {
       console.log(quote)
       this.setState({
+        
         quote: quote
       })
     }
      
     )
   }
+
+  
 
   render() {
 
@@ -45,7 +55,7 @@ class App extends React.Component {
         <div className="row"></div>
         
 
-          <QuoteBox quote={this.state.quote} getQuote={this.getQuote}/>
+          <QuoteBox quote={this.state} getQuote={this.getQuote}/>
     
 
         
