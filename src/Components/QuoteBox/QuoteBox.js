@@ -8,7 +8,7 @@ class QuoteBox extends React.Component {
 
 
         return (
-            <div className="row align-items-center">
+            <div className="row align-items-center my-auto">
                 <div className="col-3"></div>
             <div className="col-6 card border-0 bg-white" id="quote-box">
                 <div className="card-body">
