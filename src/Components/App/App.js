@@ -3,7 +3,6 @@ import { getQuoteAction } from '../../actions/getQuoteAction';
 import { connect } from 'react-redux';
 import ReactFCCtest from 'react-fcctest';
 import QuoteBox from '../QuoteBox/QuoteBox';
-import FamousQuote from '../../util/FamousQuote';
 
 
 const colors = [
@@ -17,34 +16,18 @@ const colors = [
 ];
 
 class App extends React.Component {
- 
-componentDidMount() {
-  this.props.getQuoteAction();
-}
+
+  componentDidMount() {
+    this.props.getQuoteAction();
+  }
 
 
   render() {
     return (
-      
-      <div className={'container-fluid bg-' + this.props.color}  style = {{height:"100vh"}}>
-
-        
-        <div className="row"></div>
-        
-
-          <QuoteBox quote={this.props.quote} author={this.props.author} color={this.props.color} getQuoteAction={this.props.getQuoteAction}/>
-    
-
-        
-        <div className="row"></div>
-
-    { /*  FreeCodeCamp tests  */}
-        <div>
-          <ReactFCCtest />
-        </div>
-
+      <div>
+        <QuoteBox quote={this.props.quote} author={this.props.author} color={this.props.color} getQuoteAction={this.props.getQuoteAction} />
+        <ReactFCCtest />
       </div>
-
     );
   }
 }
@@ -58,7 +41,7 @@ componentDidMount() {
 const mapStateToProps = (state) => {
   return {
     quote: state.quote.quote,
-    author: state.quote.author,
+    author: state.quote.author, //Need to delineate like this as can't pass an object to props
     color: state.color
   }
 }
@@ -73,4 +56,4 @@ const mapDispatchToProps = (dispatch) => {
 
 //connect returns a higher order component which then wraps App. 
 //This is how we connect state to props for App component.
-export default connect(mapStateToProps, {getQuoteAction})(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

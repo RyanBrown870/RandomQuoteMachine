@@ -37,11 +37,3 @@ export default (state = initState, action) => {
   }
 };
 
-//   import { combineReducers } from 'redux';
-// import simpleReducer from './simpleReducer';
-
-// let rootReducer = combineReducers;
-
-// export default rootReducer({
-//  simpleReducer
-// });

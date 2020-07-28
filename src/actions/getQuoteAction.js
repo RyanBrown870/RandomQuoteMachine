@@ -1,6 +1,4 @@
-import FamousQuote from '../util/FamousQuote';
-
-
+import getQuote from '../util/getQuote';
 
 const REQUESTING_DATA = 'REQUESTING_DATA'
 const RECEIVED_DATA = 'RECEIVED_DATA'
@@ -15,14 +13,12 @@ export const getQuoteAction = () => {
         // dispatch request action here
         dispatch(requestingData());
         //async API call, return the promise
-        return FamousQuote.getQuote().then(
+        return getQuote().then(
             response => {
                 console.log(response);
                 dispatch(receivedData(response));
             }
         )
-
-
     }
 };
 
