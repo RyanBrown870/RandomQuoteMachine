@@ -1,9 +1,10 @@
 import React from 'react';
-import { simpleAction } from '../../actions/simpleAction';
+import { getQuoteAction } from '../../actions/getQuoteAction';
 import { connect } from 'react-redux';
 import ReactFCCtest from 'react-fcctest';
 import QuoteBox from '../QuoteBox/QuoteBox';
 import FamousQuote from '../../util/FamousQuote';
+
 
 const colors = [
   'primary',
@@ -16,58 +17,22 @@ const colors = [
 ];
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      quote: {
-        quote: '',
-        author: ''
-      },
-      color: 'primary'
-      
-    }
-
-    this.getQuote = this.getQuote.bind(this);
-    
-  }
-
- //to retrieve a quote when page loads to intialise state
-  componentDidMount() {
-    this.getQuote();
-   
-  }
-
-
-
-
-
-  getQuote() {
-    
-    FamousQuote.getQuote().then(quote => {
-      const color = colors[Math.floor(Math.random()*6)];
-      this.setState({
-        quote: quote,
-        color: color
-      })
-    }
-     
-    )
-  }
-
-
+ 
+componentDidMount() {
+  this.props.getQuoteAction();
+}
 
 
   render() {
-
     return (
-      <div className={'container-fluid bg-' + this.state.color}  style = {{height:"100vh"}}>
+      
+      <div className={'container-fluid bg-' + this.props.color}  style = {{height:"100vh"}}>
 
         
         <div className="row"></div>
         
 
-          <QuoteBox quote={this.state.quote} color={this.state.color} getQuote={this.getQuote}/>
+          <QuoteBox quote={this.props.quote} author={this.props.author} color={this.props.color} getQuoteAction={this.props.getQuoteAction}/>
     
 
         
@@ -84,49 +49,28 @@ class App extends React.Component {
   }
 }
 
-{/* We need:
-            id="quote-box"
-              id="text"
-              id="author"
-              id="new-quote" which is clickable
-              a element with id="tweet-quote"
-
-            On first load, quote machine displays random quote in id="text" plus id="author"
-
-            new-quote element should fetch a new quote
-
-            This a element should include the "twitter.com/intent/tweet" path in 
-            its href attribute to tweet the current quote.
-
-            Plan:
-
-            1. setup components to display dummy data.
-              1.a container components for logic, presentational for rendering.
-              1.b Quote component (display), then QuoteResult (logic passed down to Quote)
-            2. setup the quote API call in separate module.
-            3. sort out CSS etc
-        
-      */}
-
 // Redux code:
 
 
 // we return the an object that we build, pass in the value from state (from the reducer) 
-// for whatever key we desire.
+// for whatever key we desire. This is how we build the state on Redux store, then can access 
+// that from the component's props for whichever component we connect (in this case, App)
 const mapStateToProps = (state) => {
   return {
-    data: state.data
+    quote: state.quote.quote,
+    author: state.quote.author,
+    color: state.color
   }
 }
 
-//how to send actions in props to update redux store state
+//how we give component props the store.dispatch function. This allows us to change state on the redux store
 const mapDispatchToProps = (dispatch) => {
   return {
-    simpleAction: (data) => { dispatch(simpleAction(data)) }
+    getQuoteAction: () => { dispatch(getQuoteAction()) }  //returning which functions to map to the component
   }
 }
 
 
 //connect returns a higher order component which then wraps App. 
 //This is how we connect state to props for App component.
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {getQuoteAction})(App);

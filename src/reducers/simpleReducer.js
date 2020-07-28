@@ -1,10 +1,47 @@
-export default (state = {}, action) => {
-    switch (action.type) {
-     case 'SIMPLE_ACTION':
+
+const REQUESTING_DATA = 'REQUESTING_DATA'
+const RECEIVED_DATA = 'RECEIVED_DATA'
+
+const initState = {
+  quote: '',
+  color: ''
+};
+
+const colors = [
+  'primary',
+  'secondary',
+  'success',
+  'danger',
+  'warning',
+  'info',
+  'dark',
+];
+
+
+
+export default (state = initState, action) => {
+
+  const color = colors[Math.floor(Math.random() * 6)];
+  switch (action.type) {
+
+    case 'REQUESTING_DATA':
+      return state;
+    case 'RECEIVED_DATA':
       return {
-       result: action.data
+        ...state,
+        quote: action.quote,
+        color: color
       }
-     default:
-      return state
-    }
-   }
+    default:
+      return state;
+  }
+};
+
+//   import { combineReducers } from 'redux';
+// import simpleReducer from './simpleReducer';
+
+// let rootReducer = combineReducers;
+
+// export default rootReducer({
+//  simpleReducer
+// });

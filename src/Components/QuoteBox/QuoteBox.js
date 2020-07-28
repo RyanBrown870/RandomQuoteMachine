@@ -15,12 +15,12 @@ class QuoteBox extends React.Component {
                     
                     
                 <div id="text">
-        <blockquote className={"blockquote text-center text-" + this.props.color}><strong>"</strong>{this.props.quote.quote}</blockquote>
+        <blockquote className={"blockquote text-center text-" + this.props.color}><strong>"</strong>{this.props.quote}</blockquote>
                 </div>
 
                 <div className="text-muted text-white" id="author">
                     <blockquote>
-                        <footer className={"blockquote-footer text-right text-" + this.props.color}>{this.props.quote.author}</footer>
+                        <footer className={"blockquote-footer text-right text-" + this.props.color}>{this.props.author}</footer>
                         </blockquote>
         
                 </div>
@@ -35,7 +35,7 @@ class QuoteBox extends React.Component {
                     <span className="fa fa-twitter"></span>
                 </a>
 
-                <button className={"btn btn-default float-right text-white bg-" + this.props.color} id="new-quote" onClick={this.props.getQuote}>New quote</button>
+                <button className={"btn btn-default float-right text-white bg-" + this.props.color} id="new-quote" onClick={this.props.getQuoteAction}>New quote</button>
                 </div>
                 
             </div>

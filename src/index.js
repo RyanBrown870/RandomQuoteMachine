@@ -3,12 +3,19 @@ import ReactDOM from 'react-dom';
 import App from './Components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux';
+import { createStore , applyMiddleware} from 'redux';
 import rootReducer from './reducers/rootReducer';
+import thunk from 'redux-thunk'
+import simpleReducer from './reducers/simpleReducer'
 
 
-const store = createStore(rootReducer);
+const store = createStore(simpleReducer, applyMiddleware(thunk));
 
+{/* const store = Redux.createStore(
+  asyncDataReducer,
+  Redux.applyMiddleware(ReduxThunk.default)
+);
+*/ }
 
 
 ReactDOM.render(
